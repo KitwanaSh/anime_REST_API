@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party apps
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'djoser',
+    'drf_spectacular',
+    'django_filters',
+    'django_celery_beat',
+    'django_celery_results',
+    'django_sonar',
 ]
 
 MIDDLEWARE = [
