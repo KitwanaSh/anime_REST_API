@@ -1,3 +1,6 @@
 .venv/
 anime_RestAPI/__pycache__/
 .env
+core/__pycache__/
+users/__pycache__/
+
