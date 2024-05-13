@@ -1,7 +1,7 @@
 from datetime import timedelta
 import os
 from pathlib import Path
-from decouple import config
+# from decouple import config
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -82,11 +82,23 @@ WSGI_APPLICATION = 'anime_RestAPI.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# postgresql
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'animedb',
+        'USER': 'postgres',
+        'PASSWORD': 'eze31',
+        'HOST': 'localhost',
+        'PORT': '5432',
+   }
 }
 
 
