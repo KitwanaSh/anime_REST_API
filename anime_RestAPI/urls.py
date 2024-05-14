@@ -16,4 +16,16 @@ urlpatterns = [
     path('api/schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('sonar/', include('django_sonar.urls')),
+
+
+    # API ENDPOINTS
+    path('auth/', include('djoser.urls')),
+    path('jwt/', include('djoser.urls.jwt')),
+
+
+    # APPLICATION ENDPOINTS
+    path('api/', include('google_login.urls')),
+    path('merchant_profile/', include('profiles.urls')),
+    path('products/', include('products.urls')),
+    path('notifications/', include('notifications.urls')),
 ]
