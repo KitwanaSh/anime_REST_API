@@ -4,3 +4,7 @@ anime_RestAPI/__pycache__/
 core/__pycache__/
 users/__pycache__/
 
+#This file is for testing the models in the core app inside the migrations folder
+# But it is not being used in the project
+test_models.py
+
