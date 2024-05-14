@@ -125,7 +125,7 @@ PRODUCT_CATEGORIES = [
 ]
 
 
-# Create your models here.
+
 class CustomUser(AbstractUser):
     id = models.UUIDField(
         primary_key=True,
@@ -191,7 +191,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
     product_image = models.ImageField(upload_to=product_image_file, null=True, blank=True)
     stock = models.PositiveIntegerField(default=0, null=False, blank=False)
-    merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="product_merchant")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -219,7 +219,7 @@ class Cart(models.Model):
         editable=False,
         unique=True
     )
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="cart_user")
     products = models.ManyToManyField(Product, through='CartItem')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -235,7 +235,7 @@ class CartItem(models.Model):
         editable=False,
         unique=True
     )
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -249,8 +249,8 @@ class ProductReview(models.Model):
         editable=False,
         unique=True
     )
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="productReviews_user")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productReviews_product")
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -265,7 +265,7 @@ class Payment(models.Model):
         unique=True
     )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="payment_user")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -284,9 +284,9 @@ class Checkout(models.Model):
         ('successful', 'successful'),
         ('failed', 'failed')
     ]
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="checkout_user")
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE, related_name="checkout_cart")
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, related_name="checkout_payment")
     status = models.CharField(max_length=50, choices=STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -299,7 +299,7 @@ class Notification(models.Model):
         editable=False,
         unique=True
     )
-    recipient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notification_recipient")
     message = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)

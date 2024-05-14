@@ -2,7 +2,6 @@ from django.contrib import admin
 from core.models import CustomUser, Payment, Product, Cart, CartItem, ProductReview, Checkout, MerchantProfile, Notification
 
 
-# Register your models here.
 admin.site.register(CustomUser)
 admin.site.register(Payment)
 admin.site.register(Cart)
