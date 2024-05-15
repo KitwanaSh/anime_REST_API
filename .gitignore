@@ -8,3 +8,7 @@ users/__pycache__/
 # But it is not being used in the project
 test_models.py
 
+google_login/__pycache__/
+notifications/__pycache__/
+products/__pycache__/
+profiles/__pycache__/
