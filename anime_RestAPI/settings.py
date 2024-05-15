@@ -139,12 +139,59 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+DJANGO_SONAR = {
+    'excludes': [
+        STATIC_URL,
+        MEDIA_URL,
+        '/sonar/',
+        '/admin/',
+        '/__reload__/',
+    ],
+}
+
+# DJOSER SETTINGS
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserCreateSerializer',
+        'current_user': 'users.serializers.CurrentUserSerializer',
+    }
+}
+
+# RESTFRAMEWORK SETTINGS
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
+}
+
+
+# API Docs settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Atsuko CLone API',
+    'DESCRIPTION': 'Atsuko Clone project API Documents',
+    'VERSION': '1.0.0',
+    'SCHEMA_PATH_PREFIX': '/backend/api/*',
+    # 'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAuthenticated'],
+    'DISABLE_ERRORS_AND_WARNINGS': True,
+    'COMPONENT_SPLIT_REQUEST': True
+}
 
 BASE_BACKEND_URL = 'http://localhost:8000'
 
