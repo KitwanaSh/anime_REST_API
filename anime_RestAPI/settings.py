@@ -56,6 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_sonar.middlewares.requests.RequestsMiddleware',
+    # Internatinalize the django rest framework
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'anime_RestAPI.urls'
