@@ -187,8 +187,8 @@ SIMPLE_JWT = {
 
 # API Docs settings
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Atsuko CLone API',
-    'DESCRIPTION': 'Atsuko Clone project API Documents',
+    'TITLE': 'Anime API',
+    'DESCRIPTION': 'Anime E-commerce site project API Documents',
     'VERSION': '1.0.0',
     'SCHEMA_PATH_PREFIX': '/backend/api/*',
     # 'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAuthenticated'],
